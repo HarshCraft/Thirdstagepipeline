@@ -5,8 +5,7 @@ pipeline {
 
         stage('PULL') {
             steps {
-                git branch: 'devops',
-                    url: 'https://github.com/HarshCraft/Thirdstagepipeline.git'
+                    git 'https://github.com/HarshCraft/Thirdstagepipeline.git'
             }
         }
 
@@ -14,7 +13,7 @@ pipeline {
             steps {
                 sh '''
                 cd frontend
-                docker build -t shivansh7310/easy-frontend:latest .
+                docker build -t harshhdockerhub/easy-frontend:latest .
                 '''
             }
         }
@@ -23,7 +22,7 @@ pipeline {
             steps {
                 sh '''
                 cd backend
-                docker build -t shivansh7310/easy-backend:latest .
+                docker build -t harshhdockerhub/easy-backend:latest .
                 '''
             }
         }
@@ -31,15 +30,16 @@ pipeline {
         stage('DOCKER-PUSH') {
             steps {
                 sh '''
-                docker push shivansh7310/easy-frontend:latest
-                docker push shivansh7310/easy-backend:latest
+                docker push harshhdockerhub/easy-frontend:latest
+                docker push harshhdockerhub/easy-backend:latest
                 '''
-            }
+           }
+	}	
             stage('DOCKER-CLEAN') {
             steps {
                 sh '''
-                docker rmi -f shivansh7310/easy-frontend:latest
-                docker rmi -f shivansh7310/easy-backend:latest
+                docker rmi -f harshhdockerhub/easy-frontend:latest
+                docker rmi -f harshhdockerhub/easy-backend:latest
                 '''
             }
         }
